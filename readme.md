@@ -10,6 +10,8 @@ I'm going through every Rust By Example located here: https://doc.rust-lang.org/
 
 * Well it's not me just copy-pasting the Rust By Example code
 * It's also not me typing the Rust By Example code by rote
+* * Update: some of it is definitely me typing the Rust By Example code by rote.
+* * Still, you gotta change it around and play with it or you won't really learn anything!
 * It's also also not official, or endorsed by anyone.
 * Finally, it's not *really* an example I'd use to demonstrate my programming skill. I definitionally am using this to learn, not to demonstrate.
 
