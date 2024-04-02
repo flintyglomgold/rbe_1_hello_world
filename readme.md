@@ -19,3 +19,7 @@ I'm going through every Rust By Example located here: https://doc.rust-lang.org/
 
 * To keep myself honest
 * To also maintain good git practices as I am rusty (HA) at that as well.
+
+#### Hey listen man your alphanumeric ordering is all wonky
+
+* Yeah numbers come before letters in ASCII. Renames for the directories forthcoming.
