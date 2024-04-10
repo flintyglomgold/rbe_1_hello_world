@@ -1,6 +1,12 @@
 #![allow(overflowing_literals)]
 // why can't i hold all these literals
 
+// pre-main work for ALIASING
+
+type NanoSecond = u64;
+type Inch = u64;
+type U64 = u64;
+
 fn main() {
     let decimal: f32 = 65.4321;
 
@@ -71,4 +77,38 @@ fn main() {
 
     // some extra fun, the unsafe -100 conversion results, on my machine in 0.
     // in the tutorial, it is 156. Time to check my compiler version, I guess?
+
+    // suffixed literals
+    let x = 1u8;
+    let y = 2u32;
+    let z = 3f32;
+
+    // unsuffixed literals
+    let i = 1;
+    let f = 1.0;
+
+    // `size_of_val` returns the size of a variable in bytes
+    println!("size of `x` in bytes: {}", std::mem::size_of_val(&x));
+    println!("size of `y` in bytes: {}", std::mem::size_of_val(&y));
+    println!("size of `z` in bytes: {}", std::mem::size_of_val(&z));
+    println!("size of `i` in bytes: {}", std::mem::size_of_val(&i));
+    println!("size of `f` in bytes: {}", std::mem::size_of_val(&f));
+
+    // INFERENCE
+
+    let elem = 5u8;
+
+    let mut vec = Vec::new(); // empty vector with no type??
+
+    vec.push(elem);
+
+    println!("{:?}", vec);
+
+    // ALIASING
+
+    let nanoseconds: NanoSecond = 5 as u64;
+    let inches: Inch = 2 as U64;
+
+    println!("{} nanoseconds + {} inches = {} units?????", inches, nanoseconds, inches + nanoseconds);
+
 }
