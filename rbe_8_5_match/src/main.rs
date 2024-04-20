@@ -1,3 +1,16 @@
+#[allow(dead_code)]
+
+enum Color{
+    Red,
+    Blue,
+    Green,
+    RGB(u32, u32, u32),
+    HSV(u32, u32, u32),
+    HSL(u32, u32, u32),
+    CMY(u32, u32, u32),
+    CMYK(u32, u32, u32, u32),
+}
+
 fn main() {
 
     // match
@@ -66,5 +79,69 @@ fn main() {
             println!("array[0] = {}, middle = {:?}, and the last element is {}",
                 first, middle, last
         ),
+    }
+
+    // destructuring enums
+
+    let color = Color::RGB(122, 17, 40); //#7A1128, a dark brown red. Topical!
+
+    println!("What color is it?");
+
+    match color{
+        Color::Red      => println!("The color is red!"),
+        Color::Blue     => println!("The color is blue!"),
+        Color::Green    => println!("The color is green"),
+        Color::RGB(r, g, b) =>
+            println!("Red: {}, Green: {}, Blue: {}", r, g, b),
+        Color::HSV(h, s, v) =>
+            println!("Hue: {}, Saturation: {}, Value: {}", h, s, v),
+        Color::HSL(h, s, l) =>
+            println!("Hue: {}, Saturation: {}, Lightness: {}", h, s, l),
+        Color::CMY(c, m, y) =>
+            println!("Cyan: {}, Magenta: {}, Yellow: {}", c, m, y),
+        Color::CMYK(c, m, y, k) =>
+            println!("Cyan: {}, Magenta: {}, Yellow: {}, Black: {}", c, m, y, k),
+    }
+
+    // destructuring and dereferencing pointers and refs
+
+    let reference = &4;
+
+    // the & signifies that there is a reference being assigned.
+
+    match reference {
+        // If reference is pattern matched against &val,
+        // you're comparing &i32 and &val
+        // if the matching & are dropped you can get the i32
+
+        &val => println!("Got a value via destructuring: {:?}", val),
+    }
+
+    // Or you can avoid the &, and dereference before the match
+
+    match *reference {
+        val => println!("Got a value via destructuring: {:?}", val),
+    }
+    
+    let not_a_reference = 3;
+
+    let ref _is_a_reference = 3;
+
+    let value = 5;
+    let mut mut_value = 6;
+
+    match value {
+        ref r => println!("Got a reference to a value: {:?}", r),
+    }
+
+    match mut_value {
+        ref mut m => {
+            // got a reference, gotta dereference it before you can
+            // do stuff
+
+            *m += 10; // not sure if I'm out of practice or too immersed in c++
+            // but this is breaking my brain.
+            println!("We added 10. `mut_value`: {:?}", m);
+        },
     }
 }
