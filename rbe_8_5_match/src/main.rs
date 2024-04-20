@@ -177,4 +177,44 @@ fn main() {
     let bar = Bar { foo: faa };
     let Bar { foo: Foo{ x: nested_x, y: nested_y } } = bar;
     println!("Nested: nested_x = {nested_x:?}, nested_y = {nested_y:?}");
+
+    // MATCH GUARDS
+    // match gurads are conditional filters on arms of a match statements
+
+    enum Temperature {
+        Celsius(i32),
+        Fahrenheit(i32),
+    }
+
+    let temperature = Temperature::Celsius(29);
+
+    match temperature {
+        Temperature::Celsius(t) if t > 30 => println!("{} C is above 30 C", t),
+        Temperature::Celsius(t)           => println!("{} C is equal to or below 30 C", t),
+        Temperature::Fahrenheit(t) if t > 85 => println!("{} F is above 85 F", t),
+        Temperature::Fahrenheit(t)           => println!("{} F is equal to or below 85 F", t),
+    }
+
+    let number: u8 = 4;
+
+    match number {
+        i if i == 0 => println!("Zero"),
+        i if i > 0  => println!("Positive"),
+        _           => println!("Negative? On a u8?"),
+        // compiler won't take guard conditions into account when
+        // checking if all patterns are covered by the match
+    }
+
+    fn age() -> u32 {
+        15
+    }
+
+    match age() {
+        0       => println!("I'm brand new!"),
+        // if you match on a range, how do you know the value?
+        // bind a variable using `@`
+        n @ 1  ..= 12 => println!("I'm a child of age {:?}", n),
+        n @ 13 ..= 19 => println!("I'm a teen of age {:?}", n),
+        n             => println!("I'm an old person of age {:?}", n),
+    }
 }
