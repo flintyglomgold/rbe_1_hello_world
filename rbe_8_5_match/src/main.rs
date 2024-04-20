@@ -13,6 +13,11 @@ enum Color{
 
 fn main() {
 
+    struct Foo {
+        x: (u32, u32),
+        y: u32,
+    }
+
     // match
 
     let number = 13;
@@ -144,4 +149,32 @@ fn main() {
             println!("We added 10. `mut_value`: {:?}", m);
         },
     }
+
+    // dereferencing structs (using that Foo defined up top)
+
+    let foo = Foo { x: (1, 2), y: 3};
+
+    match foo {
+        Foo { x: (1, b), y } => println!("First of x is one, b = {}, y = {}", b, y),
+        
+        // or rearrange things! it's a struct!
+        Foo { y: 2, x: i } => println!("y is two, x is {:?}", i),
+
+        // rearrange things *and* ignore them! Like things in my schedule!
+        Foo { y, .. } => println!("y = {} and the rest have been ignored", y),
+    }
+    let faa = Foo { x: (1, 2), y: 3 };
+
+    // destructure structs outside of a match!
+    let Foo { x: x0, y: y0} = faa;
+    println!("Outside a struct, x0 = {x0:?}, y = {y0}");
+    println!("Inside a struct it's too hard to read.");
+
+    struct Bar{
+        foo: Foo,
+    }
+
+    let bar = Bar { foo: faa };
+    let Bar { foo: Foo{ x: nested_x, y: nested_y } } = bar;
+    println!("Nested: nested_x = {nested_x:?}, nested_y = {nested_y:?}");
 }
